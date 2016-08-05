@@ -1,0 +1,51 @@
+@(webJarAssets : WebJarAssets, form : Form[dtos.LoginCredentials] , message : String)
+
+@main(webJarAssets){
+	
+	<div class="container">
+		<div class="row main" style="padding-top:30px;">
+			<div class="col-md-offset-4 col-md-4">
+			     <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">fluffy CRM - Login</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form role="form" action="/login" method="post">
+                            <fieldset>
+                            	<div>
+                            	</div>
+                            	@if(form != null && form.hasErrors && form.error("user") != null) {
+                            	<div class="form-group has-error has-feedback">
+                            		 <label for="inputError1">@form.error("user").message</label>
+                                    <input id="inputError1" class="form-control" placeholder="Username" name="user" type="text" autofocus="" value="@if(form!=null){@form("user").value}">
+                               		<span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                                </div>
+								}else{
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Username" name="user" type="text" autofocus="" value="@if(form!=null){@form("user").value}">
+                                	
+                                </div>
+                                }
+                                @if(form != null && form.hasErrors && form.error("password") != null) {
+                                <div class="form-group has-error has-feedback">
+                            		<label for="inputError2">@form.error("password").message</label>              
+                                    <input id="inputError2" class="form-control" placeholder="Password" name="password" type="password" value="">
+                                	<span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                                </div>
+								}else{
+								<div class="form-group">
+                                    <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                                </div>
+								}
+                                <div class="form-group">
+                                	<button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                   </div>
+             </div>
+             <div class="col-md-4"></div>
+		</div>
+	</div>
+}
