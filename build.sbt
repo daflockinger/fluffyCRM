@@ -15,3 +15,8 @@ libraryDependencies ++= Seq(
   "org.webjars" % "bootstrap" % "3.3.6",
   "org.mariadb.jdbc" % "mariadb-java-client" % "1.1.8"
 )
+
+javaOptions in Test += "-Dconfig.file=conf/application.test.conf"
+
+
+fork in run := true
