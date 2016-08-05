@@ -8,33 +8,44 @@ import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.Controller;
 import play.mvc.Result;
+import services.LoginService;
 
-public class Login extends Controller{
+public class Login extends Controller {
+
+	@Inject
+	FormFactory formFactory;
+	@Inject
+	WebJarAssets webJarAssets;
+	@Inject
+	LoginService loginService;
 	
-	@Inject FormFactory formFactory;
-	@Inject WebJarAssets webJarAssets;
-
-	public Result showLoginForm(){
-		return ok(views.html.login.render(webJarAssets,null,null));
+	
+	public Result showLoginForm() {
+		return ok(views.html.login.render(webJarAssets, null));
 	}
+
 	
-	public Result login(){
+	public Result login() {
 		Form<LoginCredentials> loginForm = formFactory.form(LoginCredentials.class).bindFromRequest();
-		
-		if(loginForm.hasErrors() ){
-			return badRequest(views.html.login.render(webJarAssets,loginForm, "Please enter user and password!"));
-		}
-			LoginCredentials credentials = loginForm.get();
-			if(validate(credentials)){
-				session().clear();
-		        session("user", credentials.getUser());
-				return redirect("/");
-			}else{
-				return badRequest(views.html.login.render(webJarAssets,loginForm, "Wrong user and password entered!"));
-			}
+
+		return getLoginResult(loginForm);
 	}
 	
-	private boolean validate(LoginCredentials credentials){
-		return credentials.getUser().equals("flo") && credentials.getPassword().equals("flo");
+	private Result getLoginResult(Form<LoginCredentials> loginForm){
+		if (loginForm.hasErrors()) {
+			return badRequest(views.html.login.render(webJarAssets, loginForm));
+		}
+		LoginCredentials credentials = loginForm.get();
+		if (!loginService.authenticate(credentials)) {
+			return badRequest(views.html.login.render(webJarAssets, loginForm));
+		}else{
+			storeCredentialsInSession(credentials);
+			return redirect("/");
+		}
+	}
+	
+	private void storeCredentialsInSession(LoginCredentials credentials){
+		session().clear();
+		session("user", credentials.getUser());
 	}
 }
