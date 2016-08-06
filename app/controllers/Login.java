@@ -31,6 +31,11 @@ public class Login extends Controller {
 		return getLoginResult(loginForm);
 	}
 	
+	public Result logout(){
+		session().clear();
+		return redirect("/login");
+	}
+	
 	private Result getLoginResult(Form<LoginCredentials> loginForm){
 		if (loginForm.hasErrors()) {
 			return badRequest(views.html.login.render(webJarAssets, loginForm));

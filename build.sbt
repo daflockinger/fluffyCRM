@@ -22,6 +22,3 @@ flywayUrl := "jdbc:mariadb://127.0.0.1:3306/playfluffy1"
 flywayUser := "root"
 flywayPassword := "root"
 flywayLocations := Seq("filesystem:app/resources/db/migration")
-
-
-fork in run := true
