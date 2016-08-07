@@ -1,4 +1,4 @@
-name := """play-site1"""
+name := """playfluffy1"""
 
 version := "1.0-SNAPSHOT"
 
