@@ -18,7 +18,7 @@ public class HomeController extends Controller {
 
 	
     public Result index() {
-        return ok(views.html.index.render(webJarAssets));
+        return ok(views.html.mainHome.render(webJarAssets));
     }
 
 }
