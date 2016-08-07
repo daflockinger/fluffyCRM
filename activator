@@ -99,7 +99,7 @@ dlog () {
 }
 
 jar_file () {
-  echo "$(cygwinpath "${sbt_home}/play-site1/activator-launch-${app_version}.jar")"
+  echo "$(cygwinpath "activator-launch-${app_version}.jar")"
 }
 
 acquire_sbt_jar () {
