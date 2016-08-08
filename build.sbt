@@ -21,4 +21,4 @@ javaOptions in Test += "-Dconfig.file=conf/application.test.conf"
 flywayUrl := "jdbc:mariadb://127.0.0.1:3306/playfluffy1"
 flywayUser := "root"
 flywayPassword := "root"
-flywayLocations := Seq("filesystem:app/resources/db/migration")
+flywayLocations := Seq("filesystem:conf/flyway")
