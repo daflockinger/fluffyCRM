@@ -10,4 +10,4 @@ RUN unzip playfluffy1-1.0-SNAPSHOT.zip
 
 EXPOSE 9000
 
-ENTRYPOINT playfluffy1-1.0-SNAPSHOT/bin/playfluffy1 -Dconfig.file=/playfluffy1/conf/application.production.conf -Dplay.crypto.secret="8uKdLfn_r67kbWTh_IN;0Mlmq?0JZtmYMpwIy7PKEiMGZ73rAV@pJMWnugzL"
+ENTRYPOINT playfluffy1-1.0-SNAPSHOT/bin/playfluffy1 -Dconfig.file=/playfluffy1/playfluffy1-1.0-SNAPSHOT/conf/application.production.conf -Dplay.crypto.secret="8uKdLfn_r67kbWTh_IN;0Mlmq?0JZtmYMpwIy7PKEiMGZ73rAV@pJMWnugzL"
