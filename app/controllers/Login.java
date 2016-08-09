@@ -10,12 +10,8 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import services.LoginService;
 
-public class Login extends Controller {
+public class Login extends BaseController {
 
-	@Inject
-	FormFactory formFactory;
-	@Inject
-	WebJarAssets webJarAssets;
 	@Inject
 	LoginService loginService;
 	
