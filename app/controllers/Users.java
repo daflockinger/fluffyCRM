@@ -15,11 +15,11 @@ public class Users extends BaseController{
 	@Inject UserService userService;
 
 	public Result getUser(Long id){
-		return ok();//ok(views.html.editUser.render(userService.getUserById(id),webJarAssets));
+		return ok(views.html.edit.editUser.render(userService.getUserById(id)));
 	}
 	
 	public Result getUserList(){
-		return ok();//ok(views.html.editUser.render(userService.getAllUsers(),webJarAssets));
+		return ok(views.html.edit.users.render(userService.getAllUsers()));
 	}
 	
 	public Result saveUser(){
@@ -29,10 +29,8 @@ public class Users extends BaseController{
 		return ok();
 	}
 	
-	public Result deleteUser(){
-		Form<User> form = formFactory.form(User.class).bindFromRequest();
-		
-		userService.delete(form.get());
+	public Result deleteUser(Long id){
+		userService.delete(id);
 		return ok();
 	}
 }

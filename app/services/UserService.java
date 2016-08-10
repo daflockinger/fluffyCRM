@@ -3,25 +3,41 @@ package services;
 import java.util.List;
 
 import com.avaje.ebean.Ebean;
+import com.avaje.ebean.annotation.Transactional;
 
 import models.User;
 
 public class UserService {
 
-	
-	public User getUserById(Long id){
-		return User.find.byId(id);
+	@Transactional
+	public User getUserById(Long id) {
+		User foundUser = User.find.byId(id);
+		return foundUser != null ? foundUser : new User();
 	}
-	
-	public List<User> getAllUsers(){
+
+	@Transactional
+	public List<User> getAllUsers() {
 		return User.find.all();
 	}
-	
-	public void save(User user){
-		Ebean.save(user);
+
+	@Transactional
+	public void save(User user) {
+		if(user.id != null){
+			User toUpdateUser = User.find.byId(user.id);
+			toUpdateUser.email = user.email;
+			toUpdateUser.password = user.password;
+			toUpdateUser.save();
+		}else{
+			user.insert();
+		}
 	}
-	
-	public void delete(User user){
-		Ebean.delete(User.find.byId(user.id));
+/*
+	private boolean isUserExisting(User user) {
+		return User.find.where().eq("user", user.user).findUnique() != null;
+	}*/
+
+	@Transactional
+	public void delete(Long id) {
+		User.find.byId(id).delete();
 	}
 }
