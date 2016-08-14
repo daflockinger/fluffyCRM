@@ -1,0 +1,24 @@
+@(filters : List[String],path : String)(searchParams : dtos.SearchParams)
+
+@import org.apache.commons.lang3.StringUtils
+<form id="searchForm">
+<div class="row">
+<div class="form-group">
+    <div class="col-sm-3">
+    <select class="form-control" name="filter">
+    @for(filter <- filters){
+    	<option value="@filter" @if(filter.equals(searchParams.getFilter())){selected}>
+    		@(StringUtils.capitalize( filter.replaceAll("_"," ")))
+    	</option>
+    }
+  </select>
+    </div>
+    <div class="col-sm-7">
+      <input type="text" name="searchTerm" class="form-control"  placeholder="Search" value="@searchParams.getSearchTerm()">
+    </div>
+    <div class="col-sm-2">
+      <button class="btn btn-default" onclick="search('@path'); return false;">Search</button>
+    </div>
+  </div>
+</div>
+</form>

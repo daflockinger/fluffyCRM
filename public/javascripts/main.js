@@ -63,3 +63,18 @@ function saveEntity(path){
 			console.log("error: " + textStatus + " " + jqXHR);
 	});
 }
+
+function search(path){
+	$.ajax({
+		  method: "POST",
+		  url: "/" + path + "/search",
+		  data: $("#searchForm").serialize(),
+	}).done(
+		function( html ) {
+			$("#content").html(html);
+	}).fail(
+		function(jqXHR, textStatus) {
+			console.log("error: " + textStatus + " " + jqXHR);
+	});
+}
+

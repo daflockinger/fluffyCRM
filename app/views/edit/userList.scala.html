@@ -1,6 +1,6 @@
-@(users : List[models.User])
+@(users : List[models.User], filters : List[String])(searchParams : dtos.SearchParams)
 
-
+@search(filters,"user")(searchParams)
 @baseEditList("User","user"){
 	<th>User</th>
 }{

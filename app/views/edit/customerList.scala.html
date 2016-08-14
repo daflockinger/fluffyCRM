@@ -1,6 +1,6 @@
-@(customers : List[models.Customer])
+@(customers : List[models.Customer], filters : List[String])(searchParams : dtos.SearchParams)
 
-
+@search(filters,"customer")(searchParams)
 @baseEditList("Customer","customer"){
 	<th>Customer</th>
 }{

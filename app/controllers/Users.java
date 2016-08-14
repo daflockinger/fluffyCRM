@@ -1,10 +1,13 @@
 package controllers;
 
+import java.util.List;
+
+import com.google.common.collect.ImmutableList;
 import com.google.inject.Inject;
 
+import dtos.SearchParams;
 import models.User;
 import play.data.Form;
-import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
 import services.UserService;
@@ -25,7 +28,7 @@ public class Users extends BaseController{
 	}
 	
 	public Result getUserList(){
-		return ok(views.html.edit.userList.render(userService.getAll()));
+		return ok(views.html.edit.userList.render(userService.getAll(), getFilters(),new SearchParams()));
 	}
 	
 	public Result saveUser(){
@@ -38,5 +41,15 @@ public class Users extends BaseController{
 	public Result deleteUser(Long id){
 		userService.delete(id);
 		return ok();
+	}
+	
+	public Result search() {
+		Form<SearchParams> form = formFactory.form(SearchParams.class).bindFromRequest();
+		return ok(
+				views.html.edit.userList.render(userService.getFiltered(form.get()), getFilters(), form.get()));
+	}
+
+	private List<String> getFilters() {
+		return ImmutableList.of("user", "email");
 	}
 }

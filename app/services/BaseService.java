@@ -1,24 +1,34 @@
 package services;
 
-import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.annotation.Transactional;
+import com.google.inject.Inject;
 
+import dtos.SearchParams;
 import models.BaseModel;
-import play.Logger;
+import services.helper.ReflectionHelper;
 
 public class BaseService<T extends BaseModel> {
 
+	@Inject
+	ReflectionHelper<T> reflectionHelper;
+
 	@Transactional
 	public T getById(Long id) {
-		return Ebean.find(getModelClass(), id);
+		return Ebean.find(reflectionHelper.getClass(this), id);
 	}
 
 	@Transactional
 	public List<T> getAll() {
-		return Ebean.find(getModelClass()).findList();
+		return Ebean.find(reflectionHelper.getClass(this)).findList();
+	}
+
+	@Transactional
+	public List<T> getFiltered(SearchParams searchParams) {
+		return Ebean.find(reflectionHelper.getClass(this)).where()
+				.like(searchParams.getFilter(), "%" + searchParams.getSearchTerm() + "%").findList();
 	}
 
 	@Transactional
@@ -33,19 +43,5 @@ public class BaseService<T extends BaseModel> {
 	@Transactional
 	public void delete(Long id) {
 		Ebean.delete(getById(id));
-	}
-
-	@SuppressWarnings("unchecked")
-	private Class<T> getModelClass() {
-		Class<T> entityClass = null;
-		
-		try {
-			entityClass = (Class<T>) Class.forName(
-					((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0].getTypeName());
-		} catch (ClassNotFoundException e) {
-			Logger.error("Model not found", e);
-		}
-
-		return entityClass;
 	}
 }

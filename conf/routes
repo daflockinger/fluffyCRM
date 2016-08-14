@@ -2,6 +2,7 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
+GET     /                           controllers.HomeController.index
 
 GET		/login						controllers.Login.showLoginForm
 POST	/login						controllers.Login.login
@@ -11,16 +12,17 @@ GET		/user						controllers.Users.getUserList()
 GET		/user/:id					controllers.Users.getUser(id: Long)
 POST	/user						controllers.Users.saveUser()
 DELETE	/user/:id					controllers.Users.deleteUser(id: Long)
+POST	/user/search				controllers.Users.search()
+
 
 GET		/customer					controllers.Customers.getAll()
 GET		/customer/:id				controllers.Customers.get(id: Long)
 POST	/customer					controllers.Customers.save()
 DELETE	/customer/:id				controllers.Customers.delete(id: Long)
+POST	/customer/search			controllers.Customers.search()
 
 
 
-# An example controller showing a sample home page
-GET     /                           controllers.HomeController.index
 # An example controller showing how to use dependency injection
 GET     /count                      controllers.CountController.count
 # An example controller showing how to write asynchronous code
