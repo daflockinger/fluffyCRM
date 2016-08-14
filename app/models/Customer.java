@@ -1,31 +1,28 @@
 package models;
 
-import java.util.Date;
-
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-import play.data.validation.*;
-import com.avaje.ebean.Model;
-import play.data.format.*;
 
+import play.data.validation.Constraints;
 
 @Entity
-@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "id", "user" }) })
-public class User extends BaseModel{
+@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "id", "name", "email" }) })
+public class Customer extends BaseModel{
+		
+	@Column(nullable=false)
+	@Constraints.Required
+	public String name;
 	
 	@Column(nullable=false)
 	@Constraints.Required
-	public String user;
-	
-	@Column(nullable=false)
-	@Constraints.Required
-	public String password;
-	
-	@Constraints.Email
 	public String email;
+	
+	@Embedded
+	public Address address;
 }

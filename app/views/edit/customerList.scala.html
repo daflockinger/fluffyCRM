@@ -1,0 +1,31 @@
+@(customers : List[models.Customer])
+
+
+@baseEditList("Customer","customer"){
+	<th>Customer</th>
+}{
+	@for(customer <- customers){
+	<tr>
+	<td>@customer.id</td>
+	<td>
+	<a data-toggle="collapse" data-target="#info@customer.id">@customer.name</a>
+	</td>
+	<td>
+		<a href="#" onclick="showUserEdit(@customer.id,'customer');"  data-toggle="modal" data-target="#editModal">
+			<span class="glyphicon glyphicon-edit"></span>
+		</a>
+	</td>
+	<td><a href="#" onclick="deleteEntity(@customer.id,'customer');"><span class="glyphicon glyphicon-remove"></span></a></td>
+	</tr>
+	<tr id="info@customer.id" class="collapse">
+		<td colspan="4">
+		<dl>
+    		<dt>Name:</dt>
+    		<dd>@customer.name</dd>
+    		<dt>Email:</dt>
+    		<dd>@customer.email</dd>
+		</dl>
+		</td>
+	</tr>
+	}
+}

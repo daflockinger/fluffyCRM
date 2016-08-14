@@ -15,11 +15,17 @@ public class Users extends BaseController{
 	@Inject UserService userService;
 
 	public Result getUser(Long id){
-		return ok(views.html.edit.editUser.render(userService.getUserById(id)));
+		User user = userService.getById(id);
+		
+		if(user==null){
+			user = new User();
+		}
+		
+		return ok(views.html.edit.forms.userForm.render(user));
 	}
 	
 	public Result getUserList(){
-		return ok(views.html.edit.users.render(userService.getAllUsers()));
+		return ok(views.html.edit.userList.render(userService.getAll()));
 	}
 	
 	public Result saveUser(){

@@ -35,7 +35,7 @@ function showAddEntity(path){
 	});
 }
 function deleteEntity(id,path){
-	if(confirm('Delete @name with id ' + id + '?')){
+	if(confirm('Delete ' + path + ' with id ' + id + '?')){
 		$.ajax({
 		  	method: "DELETE",
 		  	url: "/" + path + "/" + id,
@@ -57,6 +57,7 @@ function saveEntity(path){
 	}).done(
 		function( html ) {
 			$('#editModal').modal('hide');
+			setTimeout(function(){showContent(path);},1000);
 	}).fail(
 		function(jqXHR, textStatus) {
 			console.log("error: " + textStatus + " " + jqXHR);

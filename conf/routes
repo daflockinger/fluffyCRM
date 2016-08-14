@@ -12,6 +12,11 @@ GET		/user/:id					controllers.Users.getUser(id: Long)
 POST	/user						controllers.Users.saveUser()
 DELETE	/user/:id					controllers.Users.deleteUser(id: Long)
 
+GET		/customer					controllers.Customers.getAll()
+GET		/customer/:id				controllers.Customers.get(id: Long)
+POST	/customer					controllers.Customers.save()
+DELETE	/customer/:id				controllers.Customers.delete(id: Long)
+
 
 
 # An example controller showing a sample home page
