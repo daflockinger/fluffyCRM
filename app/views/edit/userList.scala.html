@@ -1,31 +1,21 @@
 @(users : List[models.User], filters : List[String])(searchParams : dtos.SearchParams)
 
-@search(filters,"user")(searchParams)
+@dateSearch(filters,"user",searchParams)
 @baseEditList("User","user"){
 	<th>User</th>
+	<th>Email</th>
 }{
 	@for(user <- users){
 	<tr>
 	<td>@user.id</td>
-	<td>
-	<a data-toggle="collapse" data-target="#info@user.id">@user.user</a>
-	</td>
+	<td>@user.user</td>
+	<td>@user.email</td>
 	<td>
 		<a href="#" onclick="showUserEdit(@user.id,'user');"  data-toggle="modal" data-target="#editModal">
 			<span class="glyphicon glyphicon-edit"></span>
 		</a>
 	</td>
 	<td><a href="#" onclick="deleteEntity(@user.id,'user');"><span class="glyphicon glyphicon-remove"></span></a></td>
-	</tr>
-	<tr id="info@user.id" class="collapse">
-		<td colspan="4">
-		<dl>
-    		<dt>Name:</dt>
-    		<dd>@user.user</dd>
-    		<dt>Email:</dt>
-    		<dd>@user.email</dd>
-		</dl>
-		</td>
 	</tr>
 	}
 }

@@ -8,5 +8,10 @@ import com.avaje.ebean.annotation.Transactional;
 import models.User;
 
 public class UserService extends BaseService<User>{
+
+	@Override
+	protected String orderedBy() {
+		return "user";
+	}
 	
 }
