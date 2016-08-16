@@ -44,7 +44,7 @@ public abstract class BaseService<T extends BaseModel> {
 			resultQuery = resultQuery.like(searchParams.getFilter(), "%" + searchParams.getSearchTerm() + "%");
 		}
 		if (isDateRangeEntered(searchParams.getFrom(), searchParams.getTo())) {
-			resultQuery = resultQuery.and(Expr.ge("from", searchParams.getFrom()), Expr.le("to", searchParams.getTo()));
+			resultQuery = resultQuery.and(Expr.ge("created", searchParams.getFrom()), Expr.le("created", searchParams.getTo()));
 		}
 
 		return resultQuery;

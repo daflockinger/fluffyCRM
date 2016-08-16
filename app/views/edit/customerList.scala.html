@@ -1,7 +1,7 @@
 @(customers : List[models.Customer], filters : List[String])(searchParams : dtos.SearchParams)
 
 @search(filters,"customer",searchParams){ }
-@baseEditList("Customer","customer"){
+@baseEditList("Customer","customer",-1){
 	<th>Customer</th>
 }{
 	@for(customer <- customers){

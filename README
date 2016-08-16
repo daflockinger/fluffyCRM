@@ -1,3 +1,19 @@
+Ideas
+=====
+
+- add Orders and editing for Orders and Orderpositions
+- add Settings, table like key value with hirarchy top-> down only
+  one to many unidirectional
+- add Invoices, table, editing
+- think about invoice processing -> to xls/doc/pdf -> download/cloud/email
+- Employees table, editing
+- Work time accounting
+- Holiday plan 
+- Inventory table, editing
+- Inventory import -> camel from ERP/DB/CSV/FTP/Email to DB
+
+
+
 This is your new Play application
 =================================
 

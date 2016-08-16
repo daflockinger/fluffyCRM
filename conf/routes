@@ -2,24 +2,37 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-GET     /                           controllers.HomeController.index
+GET     /                           	controllers.HomeController.index
 
-GET		/login						controllers.Login.showLoginForm
-POST	/login						controllers.Login.login
-GET		/logout						controllers.Login.logout
+GET		/login							controllers.Login.showLoginForm
+POST	/login							controllers.Login.login
+GET		/logout							controllers.Login.logout
 
-GET		/user						controllers.Users.getUserList()
-GET		/user/:id					controllers.Users.getUser(id: Long)
-POST	/user						controllers.Users.saveUser()
-DELETE	/user/:id					controllers.Users.deleteUser(id: Long)
-POST	/user/search				controllers.Users.search()
+GET		/user							controllers.Users.getUserList()
+GET		/user/:id						controllers.Users.getUser(id: Long)
+POST	/user							controllers.Users.saveUser()
+DELETE	/user/:id						controllers.Users.deleteUser(id: Long)
+POST	/user/search					controllers.Users.search()
 
 
-GET		/customer					controllers.Customers.getAll()
-GET		/customer/:id				controllers.Customers.get(id: Long)
-POST	/customer					controllers.Customers.save()
-DELETE	/customer/:id				controllers.Customers.delete(id: Long)
-POST	/customer/search			controllers.Customers.search()
+GET		/customer						controllers.Customers.getAll()
+GET		/customer/:id					controllers.Customers.get(id: Long)
+POST	/customer						controllers.Customers.save()
+DELETE	/customer/:id					controllers.Customers.delete(id: Long)
+POST	/customer/search				controllers.Customers.search()
+
+GET		/order							controllers.Orders.getAll()
+GET		/order/:id						controllers.Orders.get(id: Long)
+POST	/order							controllers.Orders.save()
+DELETE	/order/:id						controllers.Orders.delete(id: Long)
+POST	/order/search					controllers.Orders.search()
+
+GET		/order/position/:orderId		controllers.OrderPositions.getAllOfOrder(orderId: Long)
+GET		/order/position/:id/:orderId	controllers.OrderPositions.get(id: Long,orderId: Long)
+POST	/order/position					controllers.OrderPositions.save()
+DELETE	/order/position/:id				controllers.OrderPositions.delete(id: Long)
+
+
 
 
 

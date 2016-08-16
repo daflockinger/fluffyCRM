@@ -10,6 +10,7 @@ import models.User;
 import play.data.Form;
 import play.mvc.Result;
 import play.mvc.Security;
+import play.twirl.api.Html;
 import services.UserService;
 
 @Security.Authenticated(Secure.class)

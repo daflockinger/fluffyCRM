@@ -1,0 +1,22 @@
+@(orderPoses : List[models.OrderPosition], filters : List[String], orderId : Long)(searchParams : dtos.SearchParams)
+
+@baseEditList("Order Position","order/position",orderId){
+	<th>Created</th>
+	<th>Name</th>
+	<th>Status</th>
+}{
+	@for(orderPos <- orderPoses){
+	<tr>
+	<td>@orderPos.id</td>
+	<td>@orderPos.created.format("MM/dd/yyyy hh:mm aa")</td>
+	<td>@orderPos.name</td>
+	<td>@orderPos.status</td>
+	<td>
+		<a href="#" onclick="showUserEdit(@orderPos.id,'order/position',@orderId);"  data-toggle="modal" data-target="#editModal@orderId">
+			<span class="glyphicon glyphicon-edit"></span>
+		</a>
+	</td>
+	<td><a href="#" onclick="deleteEntity(@orderPos.id,'order/position');"><span class="glyphicon glyphicon-remove"></span></a></td>
+	</tr>
+	}
+}

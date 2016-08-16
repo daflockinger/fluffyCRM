@@ -10,11 +10,16 @@ import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import play.data.format.Formats.DateTime;
 
 @Entity
+@Table(name="orders")
 public class Order extends BaseModel {
 
-	/*public Date created;
+	@DateTime(pattern="MM/dd/yyyy hh:mm aa")
+	public Date created;
 	
 	@Enumerated(EnumType.STRING)
 	public OrderStatus status;
@@ -22,6 +27,6 @@ public class Order extends BaseModel {
 	@ManyToOne(optional = false)
 	public Customer customer;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "order_position", fetch = FetchType.EAGER)
-	public List<OrderPosition> position;*/
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "order", fetch = FetchType.EAGER)
+	public List<OrderPosition> positions;
 }

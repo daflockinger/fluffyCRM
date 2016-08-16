@@ -1,10 +1,10 @@
 @* edit Template File *@
-@(name : String,path : String)(tableHeader : Html)(tableBody : Html)
+@(name : String,path : String, parentId: Long)(tableHeader : Html)(tableBody : Html)
 <div class="table-responsive">
 <table class="table table-hover">
     <thead>
       <tr>
-        <th><a href="#" onclick="showAddEntity('@path');" data-toggle="modal" data-target="#editModal"><span class="glyphicon glyphicon-plus" title="Add"></span></a></th>
+        <th><a href="#" onclick="showAddEntity('@path'@if(parentId>0){,'@parentId'});" data-toggle="modal" data-target="#editModal@if(parentId>0){@parentId}"><span class="glyphicon glyphicon-plus" title="Add"></span></a></th>
         @tableHeader
         <th>Edit</th>
         <th>Delete</th>
@@ -16,7 +16,7 @@
 	</table>
 </div>
 
-<div id="editModal" class="modal fade" role="dialog">
+<div id="editModal@if(parentId>0){@parentId}" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
     <!-- Modal content-->
@@ -26,11 +26,11 @@
         <h4 class="modal-title">Edit @name</h4>
       </div>
       <div class="modal-body">
-      <form class="form-horizontal" role="form" id="editForm">
+      <form class="form-horizontal" role="form" id="editForm@if(parentId>0){@parentId}">
       </form>
       </div>
       <div class="modal-footer">
-      	<a class="btn btn-default" onclick="saveEntity('@path');return false;">Save</a>
+      	<a class="btn btn-default" onclick="saveEntity('@path'@if(parentId>0){,'@parentId'});return false;">Save</a>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>

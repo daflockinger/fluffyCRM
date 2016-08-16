@@ -1,7 +1,7 @@
 @(users : List[models.User], filters : List[String])(searchParams : dtos.SearchParams)
 
-@dateSearch(filters,"user",searchParams)
-@baseEditList("User","user"){
+@search(filters,"user",searchParams){ }
+@baseEditList("User","user",-1){
 	<th>User</th>
 	<th>Email</th>
 }{

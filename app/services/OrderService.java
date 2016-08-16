@@ -8,5 +8,4 @@ public class OrderService extends BaseService<Order>{
 	protected String orderedBy() {
 		return "created";
 	}
-
 }

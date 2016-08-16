@@ -2,10 +2,16 @@ package dtos;
 
 import java.util.Date;
 
+import play.data.format.Formats.DateTime;
+
 public class SearchParams {
 	private String filter;
 	private String searchTerm;
+	
+	@DateTime(pattern="MM/dd/yyyy hh:mm aa")
 	private Date from;
+	
+	@DateTime(pattern="MM/dd/yyyy hh:mm aa")
 	private Date to;
 	
 	public String getFilter() {

@@ -4,7 +4,8 @@
 <div class="row">
 <div class="form-group col-md-6">
 	<div class="input-group date">
-    	<input type="text" class="form-control datePicker" name="from" placeholder="From">
+    	<input type="text" class="form-control datePicker" name="from" placeholder="From"
+    	value="@if(searchParams.getFrom()!=null){@searchParams.getFrom().format("MM/dd/yyyy hh:mm aa")}">
     	<div class="input-group-addon">
         	<span class="glyphicon glyphicon-calendar"></span>
     	</div>
@@ -12,7 +13,8 @@
 </div>
 <div class="form-group col-md-6">
 	<div class="input-group date">
-   		<input type="text" class="form-control datePicker" name="to" placeholder="To">
+   		<input type="text" class="form-control datePicker" name="to" placeholder="To"
+   		value="@if(searchParams.getTo()!=null){@searchParams.getTo().format("MM/dd/yyyy hh:mm aa")}">
     	<div class="input-group-addon">
         	<span class="glyphicon glyphicon-calendar"></span>
     	</div>

@@ -11,24 +11,40 @@ function showContent(callUrl){
 }
 
 
-function showUserEdit(id,path){
+function showUserEdit(id,path,parentId){
+	var idPure = "";
+	if(parentId!==undefined){
+		idPure = parentId;
+		parentId="/"+parentId; 
+	}else{
+		parentId="";
+	}
+	
 	$.ajax({
 		  method: "GET",
-		  url: "/" + path + "/" + id,
+		  url: "/" + path + "/" + id + parentId,
 		}).done(
 		  function( html ) {
-		    $('#editForm').html(html);
+		    $('#editForm'+idPure).html(html);
 		  }).fail(function(jqXHR, textStatus) {
 			  console.log("error: " + textStatus + " " + jqXHR);
 		  });
 }
-function showAddEntity(path){
+function showAddEntity(path,id){
+	var idPure = "";
+	if(id!==undefined){
+		idPure = id;
+		id="/"+id; 
+	}else{
+		id="";
+	}
+	
 	$.ajax({
 		  method: "GET",
-		  url: "/" + path + "/-1",
+		  url: "/" + path + "/-1" + id,
 	}).done(
 		function( html ) {
-			$('#editForm').html(html);
+			$('#editForm'+idPure).html(html);
 	}).fail(
 		function(jqXHR, textStatus) {
 			console.log("error: " + textStatus + " " + jqXHR);
@@ -49,14 +65,18 @@ function deleteEntity(id,path){
 	}
 }
 
-function saveEntity(path){
+function saveEntity(path,parentId){
+	if(parentId===undefined){
+		parentId="";
+	}
+	
 	$.ajax({
 		  method: "POST",
 		  url: "/" + path,
-		  data: $("#editForm").serialize(),
+		  data: $("#editForm"+parentId).serialize(),
 	}).done(
 		function( html ) {
-			$('#editModal').modal('hide');
+			$('.modal').modal('hide');
 			setTimeout(function(){showContent(path);},1000);
 	}).fail(
 		function(jqXHR, textStatus) {
@@ -78,3 +98,22 @@ function search(path){
 	});
 }
 
+function showRowData(path,id,cssId){
+	$.ajax({
+		  method: "GET",
+		  url: "/" + path + "/" + id
+	}).done(
+		function( html ) {
+			$(cssId).html(html);
+	}).fail(
+		function(jqXHR, textStatus) {
+			console.log("error: " + textStatus + " " + jqXHR);
+	});
+}
+$( document ).ready(function() {
+	$(function () {
+		$('.datePicker').datetimepicker({
+	        sideBySide: true
+	    });
+	});
+});

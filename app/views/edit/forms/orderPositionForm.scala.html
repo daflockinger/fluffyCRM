@@ -1,0 +1,49 @@
+@(orderPos : models.OrderPosition, statuses : List[String], orderId : Long)
+
+ <div class="form-group">
+    <label class="control-label col-sm-2" for="user">Name:</label>
+    <div class="col-sm-10">
+      <input type="text" name="name" class="form-control" id="user" @if(orderPos.name !=null){readonly} placeholder="Enter name" value="@orderPos.name">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="description">Description:</label>
+    <div class="col-sm-10"> 
+      <input type="text" name="description" class="form-control" id="description" placeholder="Enter description" value="@orderPos.description">
+    </div>
+  </div>
+  <input type="hidden" name="id" value="@orderPos.id">
+  <input type="hidden" name="order.id" value="@if(orderId > 0){@orderId}">
+<div class="form-group">
+	<div class="input-group date col-md-offset-2" style="margin-right:15px;">
+    	<input type="text" class="form-control datePicker" 
+    	name="created" placeholder="From" style="margin-left:15px;" 
+    	value="@if(orderPos.created!=null){@orderPos.created.format("MM/dd/yyyy hh:mm aa")}">
+    	<div class="input-group-addon">
+        	<span class="glyphicon glyphicon-calendar"></span>
+    	</div>
+	</div>
+</div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="price">Price:</label>
+    <div class="col-sm-10"> 
+      <input type="number" step="0.01" name="price" class="form-control" id="price" value="@orderPos.price">
+    </div>
+  </div>
+<div class="form-group">
+  <label for="status"  class="control-label col-sm-2">Status:</label>
+  <div class="col-sm-10"> 
+  <select class="form-control" id="status" name="status">
+  @for(status <- statuses){
+  	<option @if(orderPos.status!=null && orderPos.status.toString().equals(status)){ selected}>@status</option>
+  }
+  </select>
+  </div>
+</div>
+<script type="text/javascript">
+ $(function () {
+		$('.datePicker').datetimepicker({
+	        sideBySide: true
+	    });
+	});        
+</script>
