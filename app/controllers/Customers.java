@@ -7,6 +7,8 @@ import java.util.List;
 import com.google.common.collect.ImmutableList;
 import com.google.inject.Inject;
 
+import dtos.CustomerDTO;
+import dtos.CustomersDTO;
 import dtos.SearchParams;
 import models.Address;
 import models.Customer;
@@ -28,11 +30,12 @@ public class Customers extends BaseController {
 			customer = new Customer();
 			customer.address = new Address();
 		}
-		return ok(views.html.edit.forms.customerForm.render(customer));
+		return ok(views.html.edit.forms.customerForm.render(new CustomerDTO(customer)));
 	}
 
 	public Result getAll() {
-		return ok(views.html.edit.customerList.render(customerService.getAll(), getFilters(), new SearchParams()));
+		CustomersDTO customersDto = new CustomersDTO(customerService.getAll(), getFilters(), new SearchParams());
+		return ok(views.html.edit.customerList.render(customersDto));
 	}
 
 	public Result save() {
@@ -49,8 +52,9 @@ public class Customers extends BaseController {
 
 	public Result search() {
 		Form<SearchParams> form = formFactory.form(SearchParams.class).bindFromRequest();
-		return ok(
-				views.html.edit.customerList.render(customerService.getFiltered(form.get()), getFilters(), form.get()));
+		CustomersDTO customersDto = new CustomersDTO(customerService.getFiltered(form.get()), getFilters(), form.get());
+
+		return ok(views.html.edit.customerList.render(customersDto));
 	}
 
 	private List<String> getFilters() {

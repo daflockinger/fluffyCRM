@@ -1,14 +1,13 @@
 package controllers;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import com.google.common.collect.ImmutableList;
 import com.google.inject.Inject;
 
+import dtos.OrderDTO;
+import dtos.OrdersDTO;
 import dtos.SearchParams;
-import models.Customer;
 import models.Order;
 import models.OrderStatus;
 import play.data.Form;
@@ -16,25 +15,21 @@ import play.mvc.Result;
 import services.CustomerService;
 import services.OrderService;
 
+
 public class Orders extends BaseController{
 	
 	@Inject OrderService orderService;
 	@Inject CustomerService customerService;
 
 	public Result get(Long id){
-		Order order = orderService.getById(id);
+		OrderDTO orderDto = new OrderDTO(orderService.getById(id), OrderStatus.getStatusList(), customerService.getAll());
 		
-		if(order==null){
-			order = new Order();
-			order.created = new Date();
-			order.customer = new Customer();
-		}
-		
-		return ok(views.html.edit.forms.orderForm.render(order,OrderStatus.getStatusList(),customerService.getAll()));
+		return ok(views.html.edit.forms.orderForm.render(orderDto));
 	}
 	
-	public Result getAll(){
-		return ok(views.html.edit.orderList.render(orderService.getAll(), getFilters(),new SearchParams()));
+	public Result getAll(){		
+		OrdersDTO ordersDto = new OrdersDTO(orderService.getAll(), getFilters(), new SearchParams());
+		return ok(views.html.edit.orderList.render(ordersDto));
 	}
 	
 	public Result save(){
@@ -51,8 +46,8 @@ public class Orders extends BaseController{
 	
 	public Result search() {
 		Form<SearchParams> form = formFactory.form(SearchParams.class).bindFromRequest();
-		return ok(
-				views.html.edit.orderList.render(orderService.getFiltered(form.get()), getFilters(), form.get()));
+		OrdersDTO ordersDto = new OrdersDTO(orderService.getFiltered(form.get()),getFilters(),form.get());
+		return ok(views.html.edit.orderList.render(ordersDto));
 	}
 
 	private List<String> getFilters() {

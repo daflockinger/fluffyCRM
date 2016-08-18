@@ -1,10 +1,10 @@
-@(customers : List[models.Customer], filters : List[String])(searchParams : dtos.SearchParams)
+@(customers : dtos.CustomersDTO)
 
-@search(filters,"customer",searchParams){ }
+@search(customers.getFilters(),"customer",customers.getSearchParams()){ }
 @baseEditList("Customer","customer",-1){
 	<th>Customer</th>
 }{
-	@for(customer <- customers){
+	@for(customer <- customers.getEntities()){
 	<tr>
 	<td>@customer.id</td>
 	<td data-toggle="collapse" data-target="#info@customer.id">@customer.name</td>

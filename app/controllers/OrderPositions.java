@@ -1,10 +1,9 @@
 package controllers;
 
-import java.util.ArrayList;
-
 import com.google.inject.Inject;
 
-import dtos.SearchParams;
+import dtos.OrderPositionDTO;
+import dtos.OrderPositionsDTO;
 import models.OrderPosition;
 import models.OrderStatus;
 import play.data.Form;
@@ -22,12 +21,14 @@ public class OrderPositions extends BaseController {
 			orderPos = new OrderPosition();
 		}
 
-		return ok(views.html.edit.forms.orderPositionForm.render(orderPos, OrderStatus.getStatusList(),orderId));
+		return ok(views.html.edit.forms.orderPositionForm
+				.render(new OrderPositionDTO(orderPos, orderId, OrderStatus.getStatusList())));
 	}
 
 	public Result getAllOfOrder(Long orderId) {
-		return ok(views.html.edit.orderPositionList.render(orderPosService.getAllFromOrder(orderId),
-				new ArrayList<String>(), orderId,new SearchParams()));
+		OrderPositionsDTO orderPosesDto = new OrderPositionsDTO(orderPosService.getAllFromOrder(orderId), orderId);
+
+		return ok(views.html.edit.orderPositionList.render(orderPosesDto));
 	}
 
 	public Result save() {

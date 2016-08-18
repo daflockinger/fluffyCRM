@@ -1,11 +1,11 @@
-@(users : List[models.User], filters : List[String])(searchParams : dtos.SearchParams)
+@(users : dtos.UsersDTO)
 
-@search(filters,"user",searchParams){ }
+@search(users.getFilters(),"user",users.getSearchParams()){ }
 @baseEditList("User","user",-1){
 	<th>User</th>
 	<th>Email</th>
 }{
-	@for(user <- users){
+	@for(user <- users.getEntities()){
 	<tr>
 	<td>@user.id</td>
 	<td>@user.user</td>

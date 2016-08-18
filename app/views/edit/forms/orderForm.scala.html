@@ -1,10 +1,10 @@
-@(order : models.Order, statuses : List[String], customers : List[models.Customer])
+@(order : dtos.OrderDTO)
 
 <div class="form-group">
 	<div class="input-group date col-md-offset-2" style="margin-right:15px;">
     	<input type="text" class="form-control datePicker" 
     	name="created" placeholder="From" style="margin-left:15px;" 
-    	value="@if(order.created!=null){@order.created.format("MM/dd/yyyy hh:mm aa")}">
+    	value="@if(order.getEntity().created!=null){@order.getEntity().created.format("MM/dd/yyyy hh:mm aa")}">
     	<div class="input-group-addon">
         	<span class="glyphicon glyphicon-calendar"></span>
     	</div>
@@ -14,8 +14,8 @@
   <label for="status"  class="control-label col-sm-2">Order status:</label>
   <div class="col-sm-10"> 
   <select class="form-control" id="status" name="status">
-  @for(status <- statuses){
-  	<option @if(order.status!=null && order.status.toString().equals(status)){ selected}>@status</option>
+  @for(status <- order.getStatuses()){
+  	<option @if(order.getEntity().status!=null && order.getEntity().status.toString().equals(status)){ selected}>@status</option>
   }
   </select>
   </div>
@@ -24,11 +24,11 @@
   <label for="customer.id" class="control-label col-sm-2">Customer:</label>
   <div class="col-sm-10"> 
   <select class="form-control" id="customer.id" name="customer.id">
-  @for(customer <- customers){
-  	<option value="@customer.id" @if(order.customer.id==customer.id){ selected}>@customer.name</option>
+  @for(customer <- order.getCustomers()){
+  	<option value="@customer.id" @if(order.getEntity().customer.id==customer.id){ selected}>@customer.name</option>
   }
   </select>
-  <input type="hidden" name="id" value="@order.id">
+  <input type="hidden" name="id" value="@order.getEntity().id">
   </div>
 </div>
 
