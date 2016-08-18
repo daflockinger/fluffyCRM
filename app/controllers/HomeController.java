@@ -1,8 +1,5 @@
 package controllers;
 
-import com.google.inject.Inject;
-
-import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
 
@@ -12,10 +9,7 @@ import play.mvc.Security;
  */
 
 @Security.Authenticated(Secure.class)
-public class HomeController extends Controller {
-
-    @Inject WebJarAssets webJarAssets;
-
+public class HomeController extends BaseController {
 	
     public Result index() {
         return ok(views.html.mainHome.render(webJarAssets));

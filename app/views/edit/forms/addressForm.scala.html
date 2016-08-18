@@ -1,0 +1,58 @@
+@* address Template File *@
+@(address: models.Address)
+
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="firstName">First name:</label>
+    <div class="col-sm-10"> 
+      <input type="text" name="address.firstName" class="form-control" id="firstName" placeholder="Enter first name" value="@address.firstName">
+    </div>
+  </div>
+  
+  
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="lastName">Last name:</label>
+    <div class="col-sm-10"> 
+      <input type="text" name="address.lastName" class="form-control" id="lastName" placeholder="Enter last name" value="@address.lastName">
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="companyName">Company:</label>
+    <div class="col-sm-10"> 
+      <input type="text" name="address.companyName" class="form-control" id="companyName" placeholder="Enter company" value="@address.companyName">
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="street">Street:</label>
+    <div class="col-sm-10"> 
+      <input type="text" name="address.street" class="form-control" id="street" placeholder="Enter " value="@address.street">
+    </div>
+  </div>
+  
+  <div class="form-group row">
+    <label class="control-label col-sm-2" for="zip">Zip code:</label>
+    <div class="col-sm-2"> 
+      <input type="text" name="address.zip" class="form-control" id="zip" placeholder="zip" value="@address.zip">
+    </div>
+    
+    <label class="control-label col-sm-1" for="city">City:</label>
+    <div class="col-sm-7"> 
+      <input type="text" name="address.city" class="form-control" id="city" placeholder="Enter city" value="@address.city">
+    </div>
+    
+  </div>
+  
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="country">Country:</label>
+    <div class="col-sm-10"> 
+      <input type="text" name="address.country" class="form-control" id="country" placeholder="Enter country" value="@address.country">
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="phone">Phone number:</label>
+    <div class="col-sm-10"> 
+      <input type="text" name="address.phone" class="form-control" id="phone" placeholder="Enter phone number" value="@address.phone">
+    </div>
+  </div>

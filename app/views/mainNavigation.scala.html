@@ -4,7 +4,7 @@
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
     <a class="navbar-brand" href="/" style="padding-top:0px;">
-        <img alt="Brand" src="@routes.Assets.at("logo.png")" style="width:auto;height:50px;">
+        <img alt="Brand" src="@routes.Assets.at("images/logo.png")" style="width:auto;height:50px;">
       </a>
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
         <span class="sr-only">Toggle navigation</span>
@@ -20,9 +20,12 @@
         <!--  <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
         <li><a href="#">Link</a></li>-->
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+          <span class="glyphicon glyphicon-cog" title="Settings"></span>
+          </a>
           <ul class="dropdown-menu">
-            <li><a href="#">User</a></li>
+            <li><a href="#" onclick="showContent('/user');">User</a></li>
+            <li><a href="#" onclick="showContent('/customer');">Customer</a></li>
          <!--     <li><a href="#">Another action</a></li>
             <li><a href="#">Something else here</a></li>
             <li role="separator" class="divider"></li>
@@ -32,11 +35,29 @@
           </ul>
         </li>
       </ul>
+      
+      <ul class="nav navbar-nav">
+        <!--  <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">Link</a></li>-->
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+          <span class="glyphicon glyphicon-tasks" title="Management"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="#" onclick="showContent('/order');">Orders</a></li>
+         <!--     <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">One more separated link</a></li>  -->
+          </ul>
+        </li>
+      </ul>
+      
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="/logout">Logout</a></li>
+        <li><a href="/logout"><span class="glyphicon glyphicon-log-out" title="Logout"></span></a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-
-<div>nav</div>

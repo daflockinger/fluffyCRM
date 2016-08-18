@@ -17,18 +17,14 @@ public class LoginServiceTest extends WithApplication{
 	
 	@Test
 	public void authenticateTest_withInvalidLogin_ShouldReturnFalse(){
-		LoginCredentials credentials = new LoginCredentials();
-		credentials.setUser("hack");
-		credentials.setPassword("me");
+		LoginCredentials credentials = new LoginCredentials("hack","me");
 		
 		assertFalse(loginService.authenticate(credentials));
 	}
 	
 	@Test
 	public void authenticateTest_withValidLogin_ShouldReturnTrue(){
-		LoginCredentials credentials = new LoginCredentials();
-		credentials.setUser("flo");
-		credentials.setPassword("flo");
+		LoginCredentials credentials = new LoginCredentials("flo","flo");
 		
 		assertTrue(loginService.authenticate(credentials));
 	}

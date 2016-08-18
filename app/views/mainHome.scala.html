@@ -2,5 +2,19 @@
 
 @main(webJarAssets){
 	@mainNavigation()
-	<div>main content</div>
+	<div id="content" class="container" style="padding-top:70px;"></div>
+	
+	<script>
+	/*function showContent(callUrl){
+		$.ajax({
+			  method: "GET",
+			  url: callUrl,
+			}).done(
+			  function( html ) {
+			    $("#content").html(html);
+			  }).fail(function(jqXHR, textStatus) {
+				  console.log("error: " + textStatus + " " + jqXHR);
+			  });
+	}*/
+	</script>
 }

@@ -1,0 +1,21 @@
+@(users : dtos.UsersDTO)
+
+@search(users.getFilters(),"user",users.getSearchParams()){ }
+@baseEditList("User","user",-1){
+	<th>User</th>
+	<th>Email</th>
+}{
+	@for(user <- users.getEntities()){
+	<tr>
+	<td>@user.id</td>
+	<td>@user.user</td>
+	<td>@user.email</td>
+	<td>
+		<a href="#" onclick="showUserEdit(@user.id,'user');"  data-toggle="modal" data-target="#editModal">
+			<span class="glyphicon glyphicon-edit"></span>
+		</a>
+	</td>
+	<td><a href="#" onclick="deleteEntity(@user.id,'user');"><span class="glyphicon glyphicon-remove"></span></a></td>
+	</tr>
+	}
+}

@@ -1,0 +1,33 @@
+@(filters : List[String],path : String,searchParams : dtos.SearchParams)(searchAddon : Html)
+
+@import org.apache.commons.lang3.StringUtils
+<div class="row">
+	<a href="#"  data-toggle="collapse" data-target="#searchForm" class="pull-right" style="margin-right:15px;">
+		<span class="glyphicon glyphicon-filter" title="Filter"></span>
+	</a>
+</div>
+<form id="searchForm" class="collapse @if(searchParams.getSearchTerm != null || searchParams.getFrom != null){ in}">
+ 	<div class="row"> 
+ 		<div class="form-group col-md-3">
+            <select class="form-control" name="filter">
+   				 @for(filter <- filters){
+    				<option value="@filter" @if(filter.equals(searchParams.getFilter())){selected}>
+    					@(StringUtils.capitalize( filter.replaceAll("_"," ")))
+    				</option>
+    			 }
+  			</select>
+        </div>   
+        <div class="form-group">
+		    <div class="input-group col-md-9">
+      			<input type="text" name="searchTerm" class="form-control"  placeholder="Search" value="@searchParams.getSearchTerm()">
+               	<span class="input-group-btn">
+					<button class="btn btn-default" onclick="search('@path'); return false;"
+							style="margin-right:15px;">              
+              			<span class="glyphicon glyphicon-search"></span>
+      				</button>                
+      			</span>
+            </div>
+        </div>
+	</div>
+	@searchAddon
+</form>

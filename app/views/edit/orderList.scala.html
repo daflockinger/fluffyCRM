@@ -1,0 +1,31 @@
+@(orders : dtos.OrdersDTO)
+
+@dateSearch(orders.getFilters(),"order",orders.getSearchParams())
+@baseEditList("Order","order",-1){
+	<th>Created</th>
+	<th>Name</th>
+	<th>Status</th>
+	<th>Positions</th>
+}{
+	@for(order <- orders.getEntities()){
+	<tr>
+	<td>@order.id</td>
+	<td>@order.created.format("MM/dd/yyyy hh:mm aa")</td>
+	<td>@order.customer.name</td>
+	<td>@order.status</td>
+	<td data-toggle="collapse" data-target="#info@order.id" onclick="showRowData('order/position','@order.id','#positions@order.id');"><span class="glyphicon glyphicon-triangle-bottom"></span></td>
+	<td>
+		<a href="#" onclick="showUserEdit(@order.id,'order');"  data-toggle="modal" data-target="#editModal">
+			<span class="glyphicon glyphicon-edit"></span>
+		</a>
+	</td>
+	<td><a href="#" onclick="deleteEntity(@order.id,'order');"><span class="glyphicon glyphicon-remove"></span></a></td>
+	</tr>
+	<tr id="info@order.id" class="collapse">
+	<td></td>
+		<td colspan="6" id="positions@order.id">
+		dynamic content oida!
+		</td>
+	</tr>
+	}
+}
