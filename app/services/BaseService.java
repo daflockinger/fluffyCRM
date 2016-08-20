@@ -20,9 +20,18 @@ public abstract class BaseService<T extends BaseModel> {
 	@Inject
 	ReflectionHelper<T> reflectionHelper;
 
+	public void setReflectionHelper(ReflectionHelper<T> reflectionHelper) {
+		this.reflectionHelper = reflectionHelper;
+	}
+
 	@Transactional
 	public T getById(Long id) {
-		return Ebean.find(reflectionHelper.getClass(this), id);
+		T entity = null;
+
+		if (id != null) {
+			entity = Ebean.find(reflectionHelper.getClass(this), id);
+		}
+		return entity!=null ? entity : reflectionHelper.getInstance(this);
 	}
 
 	@Transactional
@@ -32,8 +41,10 @@ public abstract class BaseService<T extends BaseModel> {
 
 	@Transactional
 	public List<T> getFiltered(SearchParams searchParams) {
-		return getQueries(searchParams, Ebean.find(reflectionHelper.getClass(this)).where())
-				.orderBy(orderedBy())
+		if(searchParams == null){
+			searchParams = new SearchParams();
+		}
+		return getQueries(searchParams, Ebean.find(reflectionHelper.getClass(this)).where()).orderBy(orderedBy())
 				.findList();
 	}
 
@@ -44,7 +55,8 @@ public abstract class BaseService<T extends BaseModel> {
 			resultQuery = resultQuery.like(searchParams.getFilter(), "%" + searchParams.getSearchTerm() + "%");
 		}
 		if (isDateRangeEntered(searchParams.getFrom(), searchParams.getTo())) {
-			resultQuery = resultQuery.and(Expr.ge("created", searchParams.getFrom()), Expr.le("created", searchParams.getTo()));
+			resultQuery = resultQuery.and(Expr.ge("created", searchParams.getFrom()),
+					Expr.le("created", searchParams.getTo()));
 		}
 
 		return resultQuery;
@@ -60,16 +72,18 @@ public abstract class BaseService<T extends BaseModel> {
 
 	@Transactional
 	public void save(T entity) {
-		if (entity.id != null) {
+		if (entity != null && entity.id != null) {
 			Ebean.update(entity);
-		} else {
+		} else if(entity != null){
 			Ebean.insert(entity);
 		}
 	}
 
 	@Transactional
 	public void delete(Long id) {
-		Ebean.delete(getById(id));
+		if (id != null) {
+			Ebean.delete(getById(id));
+		}
 	}
 
 	abstract protected String orderedBy();

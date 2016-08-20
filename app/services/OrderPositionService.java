@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.avaje.ebean.Ebean;
@@ -14,8 +15,16 @@ public class OrderPositionService extends BaseService<OrderPosition> {
 	}
 
 	public List<OrderPosition> getAllFromOrder(Long orderId) {
-		return Ebean.find(reflectionHelper.getClass(this)).where().eq("order_id", String.valueOf(orderId))
-				.orderBy(orderedBy()).findList();
+		List<OrderPosition> positions = null;
+		if(orderId != null){
+			positions = Ebean.find(reflectionHelper.getClass(this)).where().eq("order_id", String.valueOf(orderId))
+					.orderBy(orderedBy()).findList();
+		}
+	
+		if(positions == null){
+			positions = new ArrayList<>();
+		}
+		return positions;
 	}
 
 }

@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import com.avaje.ebean.Model;
+import com.avaje.ebean.annotation.JsonIgnore;
 
 import play.data.validation.Constraints;
 
@@ -15,6 +16,7 @@ public class Address extends Model {
 	
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
+	@JsonIgnore
 	public Long id;
 	
 	@Column(nullable=false)

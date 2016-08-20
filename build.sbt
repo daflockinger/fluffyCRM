@@ -24,3 +24,7 @@ flywayUrl := "jdbc:mariadb://127.0.0.1:3306/playfluffy1"
 flywayUser := "root"
 flywayPassword := "root"
 flywayLocations := Seq("filesystem:conf/flyway")
+
+EclipseKeys.preTasks := Seq(compile in Compile)
+EclipseKeys.projectFlavor := EclipseProjectFlavor.Java           // Java project. Don't expect Scala IDE
+EclipseKeys.createSrc := EclipseCreateSrc.ValueSet(EclipseCreateSrc.ManagedClasses, EclipseCreateSrc.ManagedResources)  

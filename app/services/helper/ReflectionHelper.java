@@ -26,4 +26,16 @@ public class ReflectionHelper<T> {
 
 		return entityClass;
 	}
+	
+	public T getInstance(Object entity){
+		T entityEmpty = null;
+		
+		try {
+			entityEmpty = getClass(entity).newInstance();
+		} catch (InstantiationException | IllegalAccessException e) {
+			Logger.error("Model not found / cannot be instantated", e);
+		}
+		
+		return entityEmpty;
+	}
 }

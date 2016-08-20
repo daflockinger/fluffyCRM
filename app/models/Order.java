@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.avaje.ebean.annotation.JsonIgnore;
+
 import play.data.format.Formats.DateTime;
 
 @Entity
@@ -28,5 +30,6 @@ public class Order extends BaseModel {
 	public Customer customer;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "order", fetch = FetchType.EAGER)
+	@JsonIgnore
 	public List<OrderPosition> positions;
 }
