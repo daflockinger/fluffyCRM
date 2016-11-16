@@ -13,16 +13,27 @@ import com.google.inject.Inject;
 
 import dtos.SearchParams;
 import models.BaseModel;
+import play.Logger;
 import services.helper.ReflectionHelper;
 
 public abstract class BaseService<T extends BaseModel> {
 
 	@Inject
 	ReflectionHelper<T> reflectionHelper;
-
+	
 	@Transactional
 	public T getById(Long id) {
-		return Ebean.find(reflectionHelper.getClass(this), id);
+		T entity = Ebean.find(reflectionHelper.getClass(this), id);
+
+		if(entity == null){
+			try {
+				entity = reflectionHelper.getClass(this).newInstance();
+			} catch (InstantiationException | IllegalAccessException e) {
+				Logger.error("Cannot instantate: " + reflectionHelper.getClass(this));
+			}
+		}
+		
+		return entity;
 	}
 
 	@Transactional

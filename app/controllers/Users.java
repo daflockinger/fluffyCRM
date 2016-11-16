@@ -24,9 +24,6 @@ public class Users extends BaseController {
 	public Result getUser(Long id) {
 		User user = userService.getById(id);
 
-		if (user == null) {
-			user = new User();
-		}
 		return ok(views.html.edit.forms.userForm.render(new UserDTO(user)));
 	}
 

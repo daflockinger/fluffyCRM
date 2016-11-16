@@ -25,11 +25,7 @@ public class Customers extends BaseController {
 
 	public Result get(Long id) {
 		Customer customer = customerService.getById(id);
-
-		if (customer == null) {
-			customer = new Customer();
-			customer.address = new Address();
-		}
+		
 		return ok(views.html.edit.forms.customerForm.render(new CustomerDTO(customer)));
 	}
 
