@@ -1,6 +1,6 @@
 package services;
 
-import dtos.CustomerDTO;
+import models.Address;
 import models.Customer;
 
 public class CustomerService extends BaseService<Customer>{
@@ -10,4 +10,14 @@ public class CustomerService extends BaseService<Customer>{
 		return "name";
 	}
 
+	@Override
+	public Customer getById(Long id) {
+		Customer customer = super.getById(id);
+
+		if (customer.address == null) {
+			customer.address = new Address();
+		}
+
+		return customer;
+	}
 }

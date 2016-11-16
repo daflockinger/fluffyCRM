@@ -25,7 +25,7 @@
   <div class="col-sm-10"> 
   <select class="form-control" id="customer.id" name="customer.id">
   @for(customer <- order.getCustomers()){
-  	<option value="@customer.id" @if(order.getEntity().customer.id==customer.id){ selected}>@customer.name</option>
+  	<option value="@customer.id" @if(order.getEntity().customer!=null && order.getEntity().customer.id==customer.id){ selected}>@customer.name</option>
   }
   </select>
   <input type="hidden" name="id" value="@order.getEntity().id">

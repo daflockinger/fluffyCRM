@@ -13,8 +13,11 @@ public class ReflectionHelper<T> {
 		Class<T> entityClass = null;
 
 		try {
-			Type genericSuper = entity.getClass().getGenericSuperclass();
-
+			Type genericSuper = null;
+			
+			if(entity != null){
+				genericSuper = entity.getClass().getGenericSuperclass();
+			}
 			if (genericSuper instanceof ParameterizedType) {
 				entityClass = (Class<T>) Class
 						.forName(((ParameterizedType) genericSuper).getActualTypeArguments()[0].getTypeName());
