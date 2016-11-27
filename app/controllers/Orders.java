@@ -12,10 +12,11 @@ import models.Order;
 import models.OrderStatus;
 import play.data.Form;
 import play.mvc.Result;
+import play.mvc.Security;
 import services.CustomerService;
 import services.OrderService;
 
-
+@Security.Authenticated(Secure.class)
 public class Orders extends BaseController{
 	
 	@Inject OrderService orderService;

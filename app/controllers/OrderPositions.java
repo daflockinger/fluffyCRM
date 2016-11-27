@@ -8,8 +8,10 @@ import models.OrderPosition;
 import models.OrderStatus;
 import play.data.Form;
 import play.mvc.Result;
+import play.mvc.Security;
 import services.OrderPositionService;
 
+@Security.Authenticated(Secure.class)
 public class OrderPositions extends BaseController {
 	@Inject
 	OrderPositionService orderPosService;

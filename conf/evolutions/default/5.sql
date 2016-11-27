@@ -5,7 +5,7 @@
 
 create table orders (
   id                         bigint auto_increment not null,
-  created					 date,
+  created					 datetime,
   status                     varchar(255) not null,
   customer_id				 bigint,
   constraint fk_customer	 FOREIGN KEY (customer_id) REFERENCES customer(id),
@@ -16,7 +16,7 @@ create table order_position (
   id                     	 bigint auto_increment not null,
   name                   	 varchar(255) not null,
   description            	 varchar(255),
-  created                	 date,
+  created                	 datetime,
   price    	                 double,
   status		   		  	 varchar(255),
   order_id                   bigint,

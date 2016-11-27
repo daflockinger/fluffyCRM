@@ -6,7 +6,7 @@ import org.junit.Before;
 import dtos.LoginCredentials;
 import play.test.WithApplication;
 
-public class LoginServiceTest extends WithApplication{
+public class LoginServiceTest extends BaseServiceTest{
 
 	private LoginService loginService;
 	

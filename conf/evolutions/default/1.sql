@@ -13,4 +13,4 @@ create table user (
 
 # --- !Downs
 
-DROP TABLE User;
+DROP TABLE user;

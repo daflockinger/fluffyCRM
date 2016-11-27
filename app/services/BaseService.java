@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -23,8 +24,11 @@ public abstract class BaseService<T extends BaseModel> {
 	
 	@Transactional
 	public T getById(Long id) {
-		T entity = Ebean.find(reflectionHelper.getClass(this), id);
-
+		T entity = null;
+			
+		if(id != null){
+			entity = Ebean.find(reflectionHelper.getClass(this), id);
+		}	
 		if(entity == null){
 			try {
 				entity = reflectionHelper.getClass(this).newInstance();
@@ -32,7 +36,6 @@ public abstract class BaseService<T extends BaseModel> {
 				Logger.error("Cannot instantate: " + reflectionHelper.getClass(this));
 			}
 		}
-		
 		return entity;
 	}
 
@@ -43,6 +46,9 @@ public abstract class BaseService<T extends BaseModel> {
 
 	@Transactional
 	public List<T> getFiltered(SearchParams searchParams) {
+		if(searchParams == null){
+			return new ArrayList<>();
+		}
 		return getQueries(searchParams, Ebean.find(reflectionHelper.getClass(this)).where())
 				.orderBy(orderedBy())
 				.findList();
@@ -71,6 +77,9 @@ public abstract class BaseService<T extends BaseModel> {
 
 	@Transactional
 	public void save(T entity) {
+		if(entity == null){
+			return;
+		}
 		if (entity.id != null) {
 			Ebean.update(entity);
 		} else {
